@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<script src="Scripts/jquery-1.12.0.min.js"></script>
+<link href="Style/table.css" rel="stylesheet" />
+<script src="Scripts/ScriptNew.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
+<body ng-app="myNoteApp" ng-controller="myNoteCtrl">
+    <link href="Style/Menu.css" rel="stylesheet" />
+    <ul class="topnav">
+        <li><a href='Menu.Html'>Home</a></li>
+        <li><a class="active" href='CrimeRates.html'>CrimeRates</a></li>
+        <li><a href='TopCrimes.html'>TopCrimes</a></li>
+        <li><a href='Chart.html'>CrimeChart</a></li>
+        <li><a href='Contact.html'>Contact</a></li>
+        <li><a href='About.html'>About</a></li>
+        <li class="icon">
+            <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <td>
+                <div>
+                    <p>
+                        <select id="crime_type" name="Crimes" ng-model="crimetype" ng-change="reloadData(crimetype)">
+                            <option value="SELECT CRIME">SELECT CRIME</option>
+                            <option value="BATTERY">BATTERY</option>
+                            <option value="THEFT">THEFT</option>
+                            <option value="ASSAULT">ASSAULT</option>
+                            <option value="KIDNAPPING">KIDNAPPING</option>
+                            <option value="WEAPONS VIOLATION">WEAPONS VIOLATION</option>
+                            <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
+                            <option value="DECEPTIVE PRACTICE">DECEPTIVE PRACTICE</option>
+                            <option value="LIQUOR LAW VIOLATION">LIQUOR LAW VIOLATION</option>
+                            <option value="NARCOTICS">NARCOTICS</option>
+                            <option value="ROBBERY">ROBBERY</option>
+                            <option value="MOTOR VEHICLE THEFT">MOTOR VEHICLE THEFT</option>
+                            <option value="BURGLARY">BURGLARY</option>
+                            <option value="PUBLIC PEACE VIOLATION">PUBLIC PEACE VIOLATION</option>
+                            <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
+                            <option value="HOMICIDE">HOMICIDE</option>
+                            <option value="GAMBLING">GAMBLING</option>
+                            <option value="STALKING">STALKING</option>
+                            <option value="SEX OFFENSE">SEX OFFENSE</option>
+                            <option value="NON-CRIMINAL">NON-CRIMINAL</option>
+                            <option value="PUBLIC INDECENCY">PUBLIC INDECENCY</option>
+                            <option value="CONCEALED CARRY LICENSE VIOLATION">CONCEALED CARRY LICENSE VIOLATION</option>
+                            <option value="RITUALISM">RITUALISM</option>
+                            <option value="DOMESTIC VIOLENCE">DOMESTIC VIOLENCE</option>
+                            <option value="INTIMIDATION">INTIMIDATION</option>
+                            <option value="ARSON">ARSON</option>
+                            <option value="CRIM SEXUAL ASSAULT">CRIM SEXUAL ASSAULT</option>
+                            <option value="HUMAN TRAFFICKING">HUMAN TRAFFICKING</option>
+                            <option value="PROSTITUTION">PROSTITUTION</option>
+                            <option value="CRIMINAL DAMAGE">CRIMINAL DAMAGE</option>
+                            <option value="OBSCENITY">OBSCENITY</option>
+                            <option value="INTERFERENCE WITH PUBLIC OFFICER">INTERFERENCE WITH PUBLIC OFFICER</option>
+                            <option value="OTHER OFFENSE">OTHER OFFENSE</option>
+                        </select>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <p>
+                        <select id ="community_type" name="Community" ng-model="CommunityType" ng-change="changeCommunityType(CommunityType)">
+                            <option value="SELECT COMMUNITY">SELECT COMMUNITY</option>
+                            <option value="1">Rogers Park (1)</option>
+                            <option value="2">West Ridge(2)</option>
+                            <option value="3">Uptown(3)</option>
+                            <option value="4">Lincoln Square(4)</option>
+                            <option value="5">North Center(5)</option>
+                            <option value="6">Lake View(6)</option>
+                            <option value="7">Lincoln Park(7)</option>
+                            <option value="8">Near North side(8)</option>
+                            <option value="9">Edison Park(9)</option>
+                            <option value="10">Norwood Park(10)</option>
+                            <option value="11">Jefferson Park(11)</option>
+                            <option value="12">Forest Glen(12)</option>
+                            <option value="13">North Park(13)</option>
+                            <option value="14">Albany Park(14)</option>
+                            <option value="15">Portage Park(15))</option>
+                            <option value="16">Irving Park(16)</option>
+                            <option value="17">Dunning(17)</option>
+                            <option value="18">Montclare(18)</option>
+                            <option value="19">Belmont Cragin(19)</option>
+                            <option value="20">Hermosa(20)</option>
+                            <option value="21">Avondale(21)</option>
+                            <option value="22">Logan Square(22)</option>
+                            <option value="23">Humboldt Park(23)</option>
+                            <option value="24">West Town(24)</option>
+                            <option value="25">Austin(25)</option>
+                            <option value="26">West Garfield Park(26)</option>
+                            <option value="27">East Garfield Park(27)</option>
+                            <option value="28">Near West Side(28)</option>
+                            <option value="29">North Lawndale(29)</option>
+                            <option value="30">South Lawndale(30)</option>
+                            <option value="31">Lower West Side(31)</option>
+                            <option value="32">Loop(32)</option>
+                            <option value="33">Near South Side(33)</option>
+                            <option value="34">Armour Square(34)</option>
+                            <option value="35">Douglas(35)</option>
+                            <option value="36">Oakland(36)</option>
+                            <option value="37">Fuller Park(37)</option>
+                            <option value="38">Grand Boulevard(38)</option>
+                            <option value="39">Kenwood(39)</option>
+                            <option value="40">Washington Park(40)</option>
+                            <option value="41">Hyde Park(41)</option>
+                            <option value="42">Woodlawn(42)</option>
+                            <option value="43">South Shore(43)</option>
+                            <option value="44">Chatham(44)</option>
+                            <option value="45">Avalon Park(45)</option>
+                            <option value="46">South Chicago(46)</option>
+                            <option value="47">Burnside(47)</option>
+                            <option value="48">Calumet Heights(48)</option>
+                            <option value="49">Roseland(49)</option>
+                            <option value="50">Pullman(50)</option>
+                            <option value="51">South Deering(51)</option>
+                            <option value="52">East Side(52)</option>
+                            <option value="53">West Pullman(53)</option>
+                            <option value="54">Riverdale(54)</option>
+                            <option value="55">Hegewisch(55)</option>
+                            <option value="56">Garfield Ridge(56)</option>
+                            <option value="57">Archer Heights(57)</option>
+                            <option value="58">Brighton Park(58)</option>
+                            <option value="59">McKinley Park(59)</option>
+                            <option value="60">Bridgeport(60)</option>
+                            <option value="61">New City(61)</option>
+                            <option value="62">West Elsdon(62)</option>
+                            <option value="63">Gage Park(63)</option>
+                            <option value="64">Clearing(64)</option>
+                            <option value="65">West Lawn(65)</option>
+                            <option value="66">Chicago Lawn(66)</option>
+                            <option value="67">West Englewood(67)</option>
+                            <option value="68">Englewood(68)</option>
+                            <option value="69">Greater Grand Crossing(69)</option>
+                            <option value="70">Ashburn(70)</option>
+                            <option value="71">Auburn Gresham(71)</option>
+                            <option value="72">Beverly(72)</option>
+                            <option value="73">Washington Heights(73)</option>
+                            <option value="74">Mount Greenwood(74)</option>
+                            <option value="75">Morgan Park(75)</option>
+                        </select>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <p>
+                        <select id ="year_type" name="Year" ng-model="YearType" ng-change="changeYearType(YearType)">
+                            <option value="SELECT YEAR">SELECT YEAR</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                        </select>
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table id="crime_table">
+        <tbody id="search_result"/>
+            <thead>
+                <tr>
+                    <th>CrimeType</th>
+                    <th>CommunityArea</th>
+                    <th>Year</th>
+                </tr>
+            </thead>         
+    </table>
+</body>
+

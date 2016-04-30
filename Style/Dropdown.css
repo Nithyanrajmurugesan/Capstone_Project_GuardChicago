@@ -1,0 +1,2 @@
+﻿select { color: red; }
+option:not(:checked) { color: black; }

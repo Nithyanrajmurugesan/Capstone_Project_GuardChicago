@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<link href="Style/Chart.css" rel="stylesheet" />
+<script src="Scripts/Chart.js"></script>
+<script src="Scripts/jquery-1.12.0.min.js"></script>
+<meta charset="utf-8">
+<body style="width:100%">
+    <link href="Style/Menu.css" rel="stylesheet" />
+    <ul class="topnav">
+        <li><a href='Menu.Html'>Home</a></li>
+        <li><a href='CrimeRates.html'>CrimeRates</a></li>
+        <li><a href='TopCrimes.html'>TopCrimes</a></li>
+        <li><a class="active" href='Chart.html'>CrimeChart</a></li>
+        <li><a href='Contact.html'>Contact Us</a></li>
+        <li><a href='About.html'>About</a></li>
+        <li class="icon">
+            <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </li>
+    </ul>
+
+</body>
+<div id='dashboard'></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+    var freqData = [];
+    var list_of_years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
+    function get_callback(year_no) {
+        return function (data) {
+            var data_trip = {};
+            var year_data = { year: year_no };
+            for (var item = 0; item < data.length; item++) {
+                data_trip[data[item].primary_type] = data[item].no_of_crime;
+            }
+            year_data.freq = data_trip;
+            freqData.push(year_data);
+            //window.alert(JSON.stringify(freqData));
+            if (freqData.length == list_of_years.length) {
+                dashboard('#dashboard', freqData);
+            }
+        }
+    }
+
+    for (year_no in list_of_years) {
+        var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json?" + "year=" + list_of_years[year_no] + "&$select=primary_type,COUNT(primary_type) AS no_of_crime&$group=primary_type&$order=no_of_crime DESC";
+        var data_trip = {};
+        $.ajax(url, { method: "GET" }).done(get_callback(list_of_years[year_no]));
+    }
+</script>
+
+

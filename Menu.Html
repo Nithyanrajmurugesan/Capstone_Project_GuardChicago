@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+    <link href="Style/Menu.css" rel="stylesheet" />
+    <link href="Style/Slideshow.css" rel="stylesheet" />
+    <script src="Scripts/Slideshow.js"></script>
+    <script src="Scripts/jquery-1.12.0.min.js"></script>
+    <ul class="topnav">
+        <li><a class="active" href='Menu.Html'>Home</a></li>
+        <li><a href='CrimeRates.html'>CrimeRates</a></li>
+        <li><a href='TopCrimes.html'>TopCrimes</a></li>
+        <li><a href='Chart.html'>CrimeChart</a></li>
+        <li><a href='Contact.html'>Contact Us</a></li>
+        <li><a href='About.html'>About</a></li>
+        <li class="icon">
+            <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </li>
+    </ul>
+
+    <div style="padding-left:16px">
+        <h2>Nithin's Site</h2>
+        <h1>GUARD CHICAGO</h1>
+    </div>
+    <div id="slideshow">
+        <div>
+            <img src="Images/Image1.jpg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image2.jpg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image3.jpg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image4.jpg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image5.jpeg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image6.jpg" width="500" height="400" />
+        </div>
+        <div>
+            <img src="Images/Image7.JPG" width="500" height="400" />
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#slideshow > div:gt(0)").hide();
+        }
+        );
+
+        setInterval(function () {
+            $('#slideshow > div:first')
+              .fadeOut(1000)
+              .next()
+              .fadeIn(1000)
+              .end()
+              .appendTo('#slideshow');
+        }, 3000);
+
+        function myFunction() {
+            document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+        }
+    </script>
+
+
+</body>
+</html>
+
